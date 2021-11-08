@@ -10,6 +10,10 @@ class Topic(models.Model):
         return str(self.title)
 
 class Room(models.Model):
+
+    class Meta:
+        ordering = ["-updated", "-created"]
+
     host  = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=200)

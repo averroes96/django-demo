@@ -1,0 +1,10 @@
+To create a django project: django-admin startproject <project-name>
+To add a new app folder: 
+    > python manage.py startapp <name>
+    > add "app_name.apps.BaseConfig" to INSTALLED_APPS list in settings.py
+To start django's dev server: python manage.py runserver
+To add a template folder:
+    settings.py >
+        TEMPLATES >
+            DIR >
+                BASE_DIR / "templates"
