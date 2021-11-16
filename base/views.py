@@ -77,16 +77,20 @@ def home(request):
         )
     rooms_count = rooms.count() # Get query row count
     topics = Topic.objects.all()
+    recent_acts = Message.objects.filter(Q(room__topic__title__icontains=q))
+
     context = {
         "rooms" : rooms, 
         "topics" : topics,
-        "rooms_count" : rooms_count
+        "rooms_count" : rooms_count,
+        "recent_acts" : recent_acts
         }
+
     return render(request, "base/home.html", context)
 
 def room(request, pk):
     room = Room.objects.get(id=pk)
-    room_messages = room.message_set.all().order_by("-created")
+    room_messages = room.message_set.all()
     participants = room.participants.all()
 
     context = {
