@@ -2,7 +2,7 @@
 <hr>
 {% for act in recent_acts %}
 <div>
-    <small>@ {{act.user}}   |   {{act.created|timesince}}</small>
+    <small> <a href="{% url 'profile' act.user.id %}">@ {{act.user}}</a>   |   {{act.created|timesince}}</small>
     <p>Commented on "{{act.room.title}}" room the following:</p>
     <blockquote>{{act.content}}</blockquote>
     {% if request.user == act.user %}

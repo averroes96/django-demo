@@ -110,13 +110,30 @@ def room(request, pk):
 
     return render(request, "base/room.html", context)
 
+def profileView(request, pk):
+
+    user = User.objects.get(id=pk)
+    rooms = user.room_set.all()
+    recent_acts = user.message_set.all()
+    topics = Topic.objects.all()
+    context = {
+        "user": user, 
+        "rooms": rooms, 
+        "recent_acts": recent_acts, 
+        "topics" : topics
+    }
+
+    return render(request, "base/profile.html", context)
+
 @login_required(login_url="login")
 def createRoom(request):
     form = RoomForm()
     if request.method == "POST":
         form = RoomForm(request.POST)
         if form.is_valid():
-            form.save()
+            room = form.save(commit=False)
+            room.host = request.user
+            room.save()
             return redirect("home")
     context = {"form" : form}
     return render(request, "base/room_form.html", context)
