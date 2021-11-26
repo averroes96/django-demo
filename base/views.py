@@ -11,13 +11,6 @@ from .forms import RoomForm
 
 # Create your views here.
 
-# rooms = [
-#     {"id" : 1, "name": "Let's learn Python"},
-#     {"id" : 2, "name": "Let's learn GIT"},
-#     {"id" : 3, "name": "Let's learn JavaScript"},
-#     {"id" : 4, "name": "Let's learn Angular"},
-# ]
-
 def loginView(request):
 
     page = "login"
