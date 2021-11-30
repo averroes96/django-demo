@@ -121,30 +121,53 @@ def profileView(request, pk):
 @login_required(login_url="login")
 def createRoom(request):
     form = RoomForm()
+    topics = Topic.objects.all()
     if request.method == "POST":
-        form = RoomForm(request.POST)
-        if form.is_valid():
-            room = form.save(commit=False)
-            room.host = request.user
-            room.save()
-            return redirect("home")
-    context = {"form" : form}
+        # form = RoomForm(request.POST)
+        topic_title = request.POST.get("room_topic")
+        topic,created = Topic.objects.get_or_create(title=topic_title)
+
+        Room.objects.create(
+            host=request.user,
+            topic=topic,
+            title=request.POST.get("title"),
+            description=request.POST.get("description")
+        )
+        
+            # if form.is_valid():
+            #     room = form.save(commit=False)
+            #     room.host = request.user
+            #     room.save()
+        return redirect("home")
+    context = {"form" : form, "topics" : topics}
     return render(request, "base/room_form.html", context)
 
 @login_required(login_url="login")
 def editRoom(request, pk):
     room = Room.objects.get(id=pk)
     form = RoomForm(instance=room)
+    topics = Topic.objects.all()
 
     if request.user != room.host:
         return HttpResponse("Get the hell out of here!!")
 
     if request.method == "POST":
         form = RoomForm(request.POST, instance=room)
-        if form.is_valid():
-            form.save()
-            return redirect("home")
-    context = {"form" : form}
+
+        topic_title = request.POST.get("room_topic")
+        topic,created = Topic.objects.get_or_create(title=topic_title)
+
+        room.title = request.POST.get("title")
+        room.topic = topic
+        room.description = request.POST.get("description")
+
+        room.save()
+
+        # if form.is_valid():
+        #     form.save()
+
+        return redirect("home")
+    context = {"form" : form, "topics" : topics, "room" : room}
     return render(request, "base/room_form.html", context)
 
 @login_required(login_url="login")
