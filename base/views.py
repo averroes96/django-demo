@@ -5,8 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Q
-from .models import Message, Room,Topic
-from django.contrib.auth.models import User
+from .models import Message, Room,Topic,User
 from .forms import RoomForm,UserForm
 
 # Create your views here.
