@@ -19,5 +19,9 @@ Project i realised while learning Django framework
 
 ## Final Result
 
-## Tutorial link
+![](static/images/screenshot.png)
+
+## Tutorial
+
+[Dennis Ivy - Traversy Media](https://www.youtube.com/watch?v=PtQiiknWUcI)
 
