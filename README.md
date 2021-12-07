@@ -7,8 +7,8 @@ Project i realised while learning Django framework
 * Resources & Environment setup
 * Installation & Setup
 * Views & Urls
-* Models
-* Templates
+* Models & Forms creation
+* Templates creation
 * Database, Migrations & Admin panel
 * CRUD Operations
 * Search functions
