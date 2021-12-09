@@ -16,6 +16,7 @@ Project i realised while learning Django framework
 * Flash Messages
 * Static files
 * REST Framework
+* CORS Handling
 
 ## Final Result
 
